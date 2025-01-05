@@ -1,0 +1,10 @@
+# Node modules
+node_modules/
+
+# Other common ignores (optional)
+.DS_Store
+.env
+
+# CSS and SCSS files
+styles.css.map
+styles.scss
