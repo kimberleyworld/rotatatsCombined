@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "normalize.css": "^8.0.1"
+  }
+}
