@@ -1,0 +1,14 @@
+[builds]
+  [[builds.frontend]]
+  path = "FrontEnd"
+  build = "npm install && npm run build"
+  output = "build"
+
+  [[builds.backend]]
+  path = "BackEnd"
+  build = "npm install"
+  output = "dist"
+
+[deploy]
+  backend = "BackEnd/server.js"
+  port = 3000
