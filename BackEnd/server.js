@@ -75,6 +75,11 @@ app.get("/audio-files", (req, res) => {
   });
 });
 
+// Fallback route for the root path, serve index.html for frontend
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../FrontEnd", "index.html"));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
