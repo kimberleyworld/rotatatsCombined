@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROTATATS</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="paint.css" />
+        <link rel="stylesheet" href="about.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.dom.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <div class="main-container">
+
+            <!-- Canvas Area -->
+      <div class="sketchSpace">
+        <div id="sketchHere">
+          <div id="message">
+          </div>
+        </div>
+      </div>
+
+        <div class="tools">
+          <!-- First Row of Colors -->
+          <div class="color-group">
+            <button class="paintTool" data-color="white">
+              <div style="background-color: #ffffff"></div>
+            </button>
+            <button class="paintTool" data-color="black">
+              <div style="background-color: #000000"></div>
+            </button>
+            <button class="paintTool" data-color="red">
+              <div style="background-color: #fd1717"></div>
+            </button>
+          </div>
+
+          <!-- Second Row of Colors and Thickness Options -->
+          <div class="thickness-group">
+            <button class="paintTool" data-color="pink">
+              <div style="background-color: #ff0a8d"></div>
+            </button>
+            <button class="paintTool" data-thickness="15">
+              <div class="thickLine"></div>
+            </button>
+            <button class="paintTool" data-thickness="3">
+              <div class="thinLine"></div>
+            </button>
+          </div>
+
+          <!-- Action Buttons Row -->
+          <div class="action-group">
+            <button class="paintTool fontExtraSmall" id="eraseButton">
+              Erase
+            </button>
+            <button class="paintTool" id="undoButton">&#9003;</button>
+            <button class="paintTool" id="clearCanvas">&#9746;</button>
+          </div>
+        </div>
+        <button id="submit" onclick="saveCanvasImage">Submit</button>
+      </div>
+
+
+    </div>
+
+<div id="toneModal" class="modal">
+  <div class="modal-content" id="toneModalContent">
+    <h2 class="PaddingBottom">Select a Skin Tone</h2>
+    <div class="custom-dropdown">
+      <button class="dropdown-button" id="dropdownButton">
+        Select Skin Tone
+        <div class="arrow-button">V</div>
+      </button>
+      <div class="dropdown-options" id="dropdownOptions">
+        <div class="dropdown-item" data-value="#3c2e28">
+          <span>Tone 1</span>
+          <div class="color-box" style="background-color: #3c2e28"></div>
+        </div>
+        <div class="dropdown-item" data-value="#4b3932">
+          <span>Tone 2</span>
+          <div class="color-box" style="background-color: #4b3932"></div>
+        </div>
+        <div class="dropdown-item" data-value="#593b2b">
+          <span>Tone 3</span>
+          <div class="color-box" style="background-color: #593b2b"></div>
+        </div>
+        <div class="dropdown-item" data-value="#e9b78a">
+          <span>Tone 4</span>
+          <div class="color-box" style="background-color: #e9b78a"></div>
+        </div>
+        <div class="dropdown-item" data-value="#c5845c">
+          <span>Tone 5</span>
+          <div class="color-box" style="background-color: #c5845c"></div>
+        </div>
+      </div>
+    </div>
+    <div class="PaddingBottom">
+    </div>
+  </div>
+</div>
+    <!-- confirm modal -->
+    <div id="confirmModal" class="modal">
+      <div class="modal-content">
+        <h2 class="PaddingBottom">Confirm Appointment</h2>
+        <div class="PaddingBottom" id="copyOfSketch">
+          <img id="srcSketch" src="" alt="" />
+        </div>
+        <div class="PaddingBottom">
+          <button id="confirm">NEXT</button>
+          <button id="noConfirm">CANCEL</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <div class="button-container">
+        <button class="close-button close-btn" id="close-buttonPay">X</button>
+      </div>
+        <h2 class="PaddingBottom">Pay deposit to confirm</h2>
+        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <stripe-buy-button
+          buy-button-id="buy_btn_1QCQSTDijhK8j4obWC294HuZ"
+          publishable-key="pk_test_51Q1rgxDijhK8j4obuHix1sBoYHbUCv3NVMjl5vHkLLrfXfUtz50xttrNKoBYNUJBQoQ91AlegSrtDW8UX0EyC8fQ00sircIRU6"
+        >
+        </stripe-buy-button>
+      </div>
+    </div>
+        <script defer src="paintSketch.js"></script>
+        <script defer src="index.js"></script>
+        <script>
+          let pressedSave = false;
+let sketch;
+let dataUrl;
+
+document.getElementById("confirm").onclick = () => {
+  document.getElementById("paymentModal").style.display = "flex";
+  document.getElementById("confirmModal").style.display = "none";
+};
+
+// takes copy of canvas and opens confirm modal
+document.getElementById("submit").onclick = () => {
+  document.getElementById("confirmModal").style.display = "flex";
+  sketch = document.querySelector("canvas");
+  dataUrl = sketch.toDataURL("image/jpeg");
+  console.log("Canvas Data URL:", dataUrl);
+  localStorage.setItem("sketchDataUrl", dataUrl);
+  document.getElementById("srcSketch").setAttribute("src", dataUrl);
+};
+// close button 
+document.getElementById("close-buttonPay").onclick = function () {
+  document.getElementById("confirmModal").style.display = "none";
+};
+
+// close button 
+document.getElementById("noConfirm").onclick = function () {
+  document.getElementById("confirmModal").style.display = "none";
+};
+
+// close button payment
+document.getElementById("close-buttonPay").onclick = function () {
+  document.getElementById("paymentModal").style.display = "none";
+};
+
+// Close the modal when clicking outside the modal
+window.onclick = function (event) {
+  const Paymodal = document.getElementById("paymentModal");
+  const confirmModal = document.getElementById("confirmModal");
+  if (event.target == Paymodal || event.target == confirmModal) {
+    document.getElementById("paymentModal").style.display = "none";
+    document.getElementById("confirmModal").style.display = "none";
+  }
+};
+        </script>
+  </body>
+</html>

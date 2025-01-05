@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="about.css" />
+    <script defer src="about.js"></script>
+
+    <title>ROTATATS</title>
+  </head>
+
+  <body class="background">
+    <div id="windows-container"></div>
+
+    <div class="flex .mt-5">
+      <div class="iconsLeft">
+        <div class="column">
+          <div class="icon" id="paintIcon">
+            <div class="file-icon">
+              <img
+                src="images/paint.png"
+                alt="Draw your own tattoo icon"
+                class="file-image"
+              />
+              <p class="file-name">Draw ur tat</p>
+            </div>
+          </div>
+          <div class="icon" id="bookingIcon">
+            <div class="file-icon">
+              <img
+                src="images/calender.png"
+                alt="Book now icon"
+                class="file-image"
+              />
+              <p class="file-name">Book Now</p>
+            </div>
+          </div>
+          <div class="icon" id="instaIcon">
+            <div class="file-icon">
+              <img
+                src="images/insta.png"
+                alt="Instagram icon"
+                class="file-image"
+              />
+              <p class="file-name">Instagram</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="icon" id="contactIcon">
+            <div class="file-icon">
+              <img
+                src="images/phone.png"
+                alt="contact info icon"
+                class="file-image"
+              />
+              <p class="file-name">Contact</p>
+            </div>
+          </div>
+          <div class="icon" id="priceListIcon">
+            <div class="file-icon">
+              <img
+                src="images/price.png"
+                alt="contact info icon"
+                class="file-image"
+              />
+              <p class="file-name">Prices</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- prev tatoos -->
+      <div class="file-icons iconsRight" id="fileIconsContainer">
+        <div class="file-icon" id="picturesIcon">
+          <img
+            src="images/doc.png"
+            alt="Previus tattoos icon"
+            class="file-image"
+          />
+          <p class="file-name">My Tattoos</p>
+        </div>
+        <!-- flash -->
+        <div class="file-icon" id="flashIcon">
+          <img src="images/doc.png" alt="Flash icon" class="file-image" />
+          <p class="file-name">Flash</p>
+        </div>
+        <!-- music player -->
+        <div id="musicPlayerIcon">
+          <div class="file-icon">
+            <img
+              src="images/music.png"
+              alt="My fave songs playlist"
+              class="file-image"
+            />
+            <p class="file-name">Fave songs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

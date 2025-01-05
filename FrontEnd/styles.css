@@ -1,0 +1,259 @@
+/* Classic Windows gray background */
+/* General Resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Tahoma, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure body takes up full height */
+  overflow-x: hidden; /* Only hides horizontal overflow */
+  margin: 0;
+  padding: 0;
+  background-color: #c0c0c0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background: #004f8c;
+  z-index: 1000;
+}
+
+.navigation p {
+  padding: 10px;
+  margin: auto;
+  color: white;
+}
+
+
+/* Flexbox for form and image container */
+.form-container {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#SendEmailDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#userEmailForm {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* General form input styling */
+.formInput {
+  margin: 5px 0;
+  width: 100%;
+}
+
+.formInput input,
+.formInput textarea,
+.formInput button {
+  width: 100%;
+}
+#sendEmailButton {
+  height: 40px;
+}
+/* Main heading */
+.mainHeading {
+  margin-bottom: 5px;
+  margin-top: 5px;
+  text-align: center;
+  font-size: 60px;
+}
+
+.completeForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-confirm-container{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#srcSketchConfirm {
+  display: block !important;
+  max-width: 200px !important;
+  height: auto !important;}
+
+/* Responsive for mobile */
+@media screen and (max-width: 800px) {
+  .form-container {
+    flex-direction: column;
+  }
+  .image-container {
+    margin-bottom: 20px;
+  }
+  #userEmailForm {
+    width: 100%;
+  }
+}
+/* Existing styles preserved */
+.colomn {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.alignCenter {
+  justify-content: center;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+.alignRight {
+  justify-content: end;
+  width: 100%;
+}
+
+.spaceBetween {
+  justify-content: space-between;
+  align-content: space-between;
+}
+
+.hide {
+  display: none;
+}
+
+.fontExtraSmall {
+  font-size: 10px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  font-weight: 300;
+}
+
+.fontSmall {
+  color: #333;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+  font-weight: 300;
+}
+
+.fontMid {
+  font-size: 40px;
+}
+
+.fontLarge {
+  font-size: 60px;
+}
+
+.NavPaddingBottom {
+  padding-bottom: 100px;
+}
+
+.PaddingBottom {
+  padding-bottom: 20px;
+}
+
+.paddingTopLarge {
+  padding-top: 10vw;
+}
+
+.marginLarge {
+  margin: 20px;
+}
+.marginMid {
+  margin: 10px;
+}
+
+p {
+  margin: 0px;
+}
+
+h2 {
+  margin: 0px;
+}
+
+/* Overall title style for Microsoft Windows 2000 look */
+.windows-2000-title {
+  font-family: "MS Sans Serif", Arial, sans-serif;
+  font-weight: bold; /* Bold font */
+  font-size: 32px; /* Large text */
+  text-align: center;
+  color: white; /* Light text on dark background */
+  background-color: #004f8c; /* Dark blue background */
+  padding: 10px 20px;
+  border: 2px solid #000080; /* Dark border similar to Windows 2000 window borders */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Light shadow for depth */
+  border-radius: 4px; /* Slight rounded corners for a soft effect */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Text shadow for extra contrast */
+}
+
+/* Optional: Adding a gradient background similar to Windows 2000 */
+.windows-2000-title-gradient {
+  font-family: "MS Sans Serif", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 32px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(to bottom, #0099cc, #004f8c); /* Gradient effect */
+  padding: 10px 20px;
+  border: 2px solid #000080;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#message p {
+  color: #333;
+  width: 500px;
+  text-align: center;
+  z-index: 10;
+  font-size: 18px;
+}
+
+#message {
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile media queries for navigation */
+@media screen and (max-width: 800px) {
+  .mainHeading {
+    font-size: 40px;
+  }
+  #message p {
+    font-size: 18px;
+    width: 300px;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */
