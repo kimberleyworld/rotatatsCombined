@@ -3,16 +3,17 @@ FROM node:16
 
 WORKDIR /app
 
-# Copy backend files
+# Copy the backend package files
 COPY ./BackEnd/package.json ./BackEnd/package-lock.json ./
 RUN npm install
 
-COPY ./BackEnd ./
+# Copy the backend files into the container
+COPY ./BackEnd ./BackEnd
 
-# Step 2: Copy the frontend files directly to the backend
-COPY ./FrontEnd /app/frontend
+# Copy the frontend files into the container
+COPY ./FrontEnd ./FrontEnd
 
-# Expose the backend port
+# Expose the backend port (usually 3000 for Node.js apps)
 EXPOSE 3000
 
 # Start the backend server
