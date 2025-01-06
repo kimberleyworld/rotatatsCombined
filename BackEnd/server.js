@@ -21,7 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Serve static frontend files
-app.use(express.static(path.join(__dirname, "FrontEnd")));
+app.use(express.static(path.join(__dirname, "../FrontEnd")));
 
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
