@@ -21,7 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Serve static frontend files
-app.use(express.static(path.join(__dirname, "../FrontEnd")));
+app.use(express.static(path.join(__dirname, 'FrontEnd')));
 
 // Nodemailer transporter
 const transporter = nodemailer.createTransport({
@@ -75,7 +75,7 @@ app.get("/audio-files", (req, res) => {
 });
 
 // Fallback route for the root path, serve index.html for frontend
-app.get("*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "FrontEnd", "index.html"));
 });
 
