@@ -98,9 +98,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add more file objects as needed
   ];
    const flash = [
-    { name: 'butterfly', src: 'images/butterfly.png' },
-    { name: 'cherub', src: 'images/phone.png' },
-    // Add more file objects as needed
+    { name: 'bunny dreams colour', src: 'images/flash/bunny.jpg' },
+    { name: 'web', src: 'images/flash/web.jpg' },
+    { name: 'square hearts', src: 'images/flash/squareHearts.jpg' },
+    { name: 'flower butterfly', src: 'images/flash/flowerbutterfly.jpg' },
+    { name: 'daydreaming block page', src: 'images/flash/daydreamingblockpage.jpg' },
+    { name: 'gates', src: 'images/flash/gates.jpg' },
+    { name: 'hot', src: 'images/flash/hot.jpg' },
+    { name: 'livelovelearntobeabutterfly', src: 'images/flash/livelovelearntobeabutterfly.jpg' },
+    { name: 'loverluvblockpage', src: 'images/flash/loverluvblockpage.jpg' },
+    { name: 'prettypleasepage', src: 'images/flash/prettypleasepage.jpg' },
+    { name: 'softspotblockspage', src: 'images/flash/softspotblocksfullpage.jpg' },
   ];
 
   document.getElementById('picturesIcon').addEventListener('click', () => {
@@ -119,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${files[currentIndex].src}" alt="${files[currentIndex].name}" id="previewImage">
         <span class="arrow right" id="nextArrow">></span>
       </div>
-    `, 600, 400);
+    `, 600, 500);
 
     document.getElementById('previewWindow').style.display = 'block';
 
