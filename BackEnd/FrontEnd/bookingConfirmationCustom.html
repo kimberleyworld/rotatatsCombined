@@ -109,6 +109,13 @@
         if (!validateForm()) {
           return;
         }
+
+        // Show loading message
+        displayMessage(
+          "Sending your email, please wait... window will close when complete",
+          "loading"
+        );
+
         // Get user inputs from the form
         const userEmail = document.getElementById("userEmail").value;
         const userComments = document.getElementById("userComments").value;

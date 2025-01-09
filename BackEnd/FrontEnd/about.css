@@ -1,7 +1,7 @@
- body{
-    justify-content: center;
-  }
   /* Ensure the body and html take up the full height */
+body{
+  justify-content: center ;
+}
 html, body {
   height: 100%;
   margin: 0;
@@ -306,5 +306,12 @@ text-align: center;
 
   .title {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    justify-content: flex-start;
+    margin: 10px;
   }
 }
