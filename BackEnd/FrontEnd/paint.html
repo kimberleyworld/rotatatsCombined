@@ -15,12 +15,14 @@
   </head>
   <body>
     <div class="main-container">
-
+      <div class="buttonDiv"> 
+        <button id="backButton">Back</button>
+        <button id="submit" onclick="saveCanvasImage">Next</button>
+      </div>
+<p>Draw your design on the canvas and I will transform it into a stencil and onto your skin.</p>
             <!-- Canvas Area -->
       <div class="sketchSpace">
         <div id="sketchHere">
-          <div id="message">
-          </div>
         </div>
       </div>
 
@@ -44,23 +46,25 @@
               <div style="background-color: #ff0a8d"></div>
             </button>
             <button class="paintTool" data-thickness="15">
-              <div class="thickLine"></div>
+              <div class="thickLine line"></div>
             </button>
             <button class="paintTool" data-thickness="3">
-              <div class="thinLine"></div>
+              <div class="thinLine line"></div>
             </button>
           </div>
 
           <!-- Action Buttons Row -->
           <div class="action-group">
             <button class="paintTool fontExtraSmall" id="eraseButton">
-              Erase
+              <img id="iconTool" src="./images/rubber.png" />
             </button>
-            <button class="paintTool" id="undoButton">&#9003;</button>
-            <button class="paintTool" id="clearCanvas">&#9746;</button>
+            <button class="paintTool" id="undoButton">
+              <img id="iconTool" src="./images/undo.png" /></button>
+            <button class="paintTool" id="clearCanvas">
+              <img id="iconTool" src="./images/Trashcan1.png" />
+            </button>
           </div>
         </div>
-        <button id="submit" onclick="saveCanvasImage">Submit</button>
       </div>
 
 
@@ -72,28 +76,44 @@
     <div class="custom-dropdown">
       <button class="dropdown-button" id="dropdownButton">
         Select Skin Tone
-        <div class="arrow-button">V</div>
+          <span class="arrow down"></span>
       </button>
       <div class="dropdown-options" id="dropdownOptions">
-        <div class="dropdown-item" data-value="#3c2e28">
+        <div class="dropdown-item" data-value="#292420">
           <span>Tone 1</span>
-          <div class="color-box" style="background-color: #3c2e28"></div>
+          <div class="color-box" style="background-color: #292420"></div>
         </div>
-        <div class="dropdown-item" data-value="#4b3932">
+        <div class="dropdown-item" data-value="#3a312a">
           <span>Tone 2</span>
-          <div class="color-box" style="background-color: #4b3932"></div>
+          <div class="color-box" style="background-color: #3a312a"></div>
         </div>
-        <div class="dropdown-item" data-value="#593b2b">
+        <div class="dropdown-item" data-value="#604134">
           <span>Tone 3</span>
-          <div class="color-box" style="background-color: #593b2b"></div>
+          <div class="color-box" style="background-color: #604134"></div>
         </div>
-        <div class="dropdown-item" data-value="#e9b78a">
+        <div class="dropdown-item" data-value="#825c53">
           <span>Tone 4</span>
-          <div class="color-box" style="background-color: #e9b78a"></div>
+          <div class="color-box" style="background-color: #825c53"></div>
         </div>
-        <div class="dropdown-item" data-value="#c5845c">
+         <div class="dropdown-item" data-value="#a07e56">
           <span>Tone 5</span>
-          <div class="color-box" style="background-color: #c5845c"></div>
+          <div class="color-box" style="background-color: #a07e56"></div>
+        </div>
+         <div class="dropdown-item" data-value="#d7bd96">
+          <span>Tone 6</span>
+          <div class="color-box" style="background-color: #d7bd96"></div>
+        </div>
+         <div class="dropdown-item" data-value="#eadaba">
+          <span>Tone 7</span>
+          <div class="color-box" style="background-color: #eadaba"></div>
+        </div>
+         <div class="dropdown-item" data-value="#f7ead0">
+          <span>Tone 8</span>
+          <div class="color-box" style="background-color: #f7ead0"></div>
+        </div>
+        <div class="dropdown-item" data-value="#f6ede4">
+          <span>Tone 9</span>
+          <div class="color-box" style="background-color: #f6ede4"></div>
         </div>
       </div>
     </div>
@@ -109,7 +129,7 @@
           <img id="srcSketch" src="" alt="" />
         </div>
         <div class="PaddingBottom">
-          <button id="confirm">NEXT</button>
+          <button id="confirm">CONFIRM</button>
           <button id="noConfirm">CANCEL</button>
         </div>
       </div>
@@ -165,6 +185,11 @@ document.getElementById("noConfirm").onclick = function () {
 document.getElementById("close-buttonPay").onclick = function () {
   document.getElementById("paymentModal").style.display = "none";
 };
+
+//back button
+document.getElementById('backButton').addEventListener('click', () => {
+  document.getElementById('toneModal').style.display = 'block';
+});
 
 // Close the modal when clicking outside the modal
 window.onclick = function (event) {

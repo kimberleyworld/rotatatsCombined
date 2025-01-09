@@ -60,6 +60,17 @@ body {
   align-items: center;
 }
 
+ .messageBox {
+    color: red;
+    font-weight: bold;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .messageBox.success {
+    color: green;
+  }
+
 #userEmailForm {
   display: flex;
   flex-direction: column;

@@ -70,13 +70,12 @@ html, body {
 .content {
   background-color: #fff;
   height: calc(100% - 30px);
-  overflow: auto;
+  overflow: hidden;
 }
 
-.icon {
-  margin: 10px;
-  cursor: pointer;
-  display: inline-block;
+.disabled {
+  opacity: 0.5; /* Grey out the icon */
+  cursor: not-allowed; /* Change cursor to indicate non-clickable */
 }
 
 /* Style for the price table */
@@ -101,21 +100,42 @@ html, body {
   font-weight: bold;
 }
 
+.music-player {
+  padding: 10px;
+  background-color: #c0c0c0; /* Classic gray background */
+  border: 2px solid #808080; /* Dark gray border */
+  border-radius: 0; /* No border radius for a classic look */
+  box-shadow: none; /* No shadow */
+  font-family: 'Tahoma', sans-serif; /* Classic Windows font */
+}
 
 #songList {
   list-style-type: none;
   padding: 0;
+  margin: 0 0 10px 0;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #808080; /* Dark gray border */
+  background-color: #ffffff; /* White background */
 }
 
 #songList li {
+  padding: 4px 8px;
   cursor: pointer;
-  padding: 5px;
-  border-bottom: 1px solid #ccc;
-  text-align: center;
+  border-bottom: 1px solid #808080; /* Dark gray border */
+  background-color: #e0e0e0; /* Light gray background */
 }
 
 #songList li:hover {
-  background-color: #eee;
+  background-color: #d0d0d0;
+}
+
+#audioPlayer {
+  width: 100%;
+  border: 1px solid #808080; /* Dark gray border */
+  background-color: #e0e0e0; /* Light gray background */
+  color: #000000; /* Black text */
+  border-radius: 0;
 }
 
 iframe {
@@ -159,29 +179,41 @@ iframe {
   width: 100%;
   height: 100%;
   padding: 20px;
+  overflow: none;
 }
 
 .preview-window img {
-  max-width: 100%;
-  max-height: 100%;
+    width: 300px;
+    max-height: 500px;
 }
 
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  color: blue;
-  cursor: pointer;
-  user-select: none;
+.arrow{
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
+  margin: 20px
 }
+
 
 .arrow.left {
-  left: 10px;
+  border-right: 15px solid #000080; /* Light blue typical of Windows XP */
 }
 .arrow.right {
-  right: 10px;
+  border-left: 15px solid #000080; /* Light blue typical of Windows XP */
 }
+
+.arrow.down{
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid #000080;
+  margin: 0px;
+margin-top: 5px;
+box-shadow: none;
+border-bottom: none;
+  }
 
 .windowContainer {
   width: 60%;
@@ -195,6 +227,25 @@ iframe {
 }
 #confirmationWindow body{
   display: block;
+}
+
+.contact {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+text-align: center;
+}
+
+#icon {
+  width: 50px;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.icon {
+  margin: 10px;
+  cursor: pointer;
+  display: inline-block;
 }
 
 
@@ -226,11 +277,6 @@ iframe {
     display: flex;
     flex-direction: column;
   }
-  .sketchSpace {
-    order: -1;
-    width: 100%;
-  }
-
   .sidebar {
     width: 100%;
     order: 1;

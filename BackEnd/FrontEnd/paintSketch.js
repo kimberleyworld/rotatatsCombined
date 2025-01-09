@@ -19,7 +19,6 @@ let strokes = [];
       background(selectedColor);
       dropdownOptions.classList.remove("active");
       document.getElementById("toneModal").style.display = "none";
-
     });
   });
 
@@ -82,10 +81,7 @@ function draw() {
     cursor(ARROW); // Reset to default cursor outside the canvas
   }
 }
-// Do not draw any buttons on the canvas anymore.
-
 function mouseDragged(event) {
-  // Prevent the page from moving during drawing
   event.preventDefault();
 
   // Save the current stroke to the strokes array
@@ -165,7 +161,7 @@ function changeBrushThickness(newThickness) {
 function setCanvasSize() {
   // Media query for screens larger than 768px (tablet and desktop)
   if (window.matchMedia("(min-width: 768px)").matches) {
-    sketchWidth = 300;
+    sketchWidth = 600;
     sketchHeight = 300;
   }
   // Media query for screens smaller than 768px (mobile)

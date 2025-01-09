@@ -1,3 +1,11 @@
+let zIndexCounter = 1000; // Initial z-index value
+
+// Function to bring a window to the front
+function bringToFront(element) {
+  zIndexCounter++;
+  element.style.zIndex = zIndexCounter;
+}
+
 function DraggableWindow(id, title, content, width = 300, height = 200) {
   this.id = id;
   this.title = title;
@@ -15,6 +23,8 @@ function DraggableWindow(id, title, content, width = 300, height = 200) {
     const windowDiv = document.createElement('div');
     windowDiv.classList.add('window');
     windowDiv.id = this.id;
+     windowDiv.style.position = 'absolute';
+    windowDiv.style.zIndex = zIndexCounter; // Set initial z-index
 
      // Set width and height based on screen size
     if (window.innerWidth <= 768) {
@@ -36,6 +46,8 @@ function DraggableWindow(id, title, content, width = 300, height = 200) {
     closeButton.innerText = 'X';
     closeButton.addEventListener('click', () => {
       windowDiv.style.display = 'none';
+      bookingIcon.classList.remove('disabled');
+      bookingIcon.style.pointerEvents = 'auto'; 
     });
 
     titleBar.appendChild(closeButton);
@@ -49,9 +61,10 @@ function DraggableWindow(id, title, content, width = 300, height = 200) {
     container.appendChild(windowDiv);
 
     makeDraggable(windowDiv);
+    windowDiv.addEventListener('mousedown', () => bringToFront(windowDiv));
+    titleBar.addEventListener('mousedown', () => bringToFront(windowDiv));
   };
 
-    // Method to update the window title
   this.updateTitle = function(newTitle) {
     const windowDiv = document.getElementById(this.id);
     if (windowDiv) {
@@ -79,8 +92,21 @@ function makeDraggable(element) {
 
   function onMouseMove(e) {
     if (!isMouseDown) return;
-    element.style.left = `${e.clientX - offsetX}px`;
-    element.style.top = `${e.clientY - offsetY}px`;
+
+    let newLeft = e.clientX - offsetX;
+    let newTop = e.clientY - offsetY;
+
+    // Constrain the element within the viewport
+    const rightBoundary = window.innerWidth - element.offsetWidth;
+    const bottomBoundary = window.innerHeight - element.offsetHeight;
+
+    if (newLeft < 0) newLeft = 0;
+    if (newTop < 0) newTop = 0;
+    if (newLeft > rightBoundary) newLeft = rightBoundary;
+    if (newTop > bottomBoundary) newTop = bottomBoundary;
+
+    element.style.left = `${newLeft}px`;
+    element.style.top = `${newTop}px`;
   }
 
   function onMouseUp() {
@@ -93,9 +119,15 @@ function makeDraggable(element) {
 
 document.addEventListener('DOMContentLoaded', () => {
   const files = [
-    { name: 'butterfly', src: 'images/butterfly.png' },
-    { name: 'cherub', src: 'images/cherub.png' },
-    // Add more file objects as needed
+        { name: 'spikes', src: 'images/prevTattoos/spikes.jpg' },
+        { name: 'flowers', src: 'images/prevTattoos/flowers.jpg' },
+        { name: 'bow', src: 'images/prevTattoos/bow.jpg' },
+        { name: 'colour line', src: 'images/prevTattoos/colourLine.jpg' },
+        { name: 'soft', src: 'images/prevTattoos/soft.jpg' },
+        { name: 'homo', src: 'images/prevTattoos/homo.jpg' },
+        { name: 'spikes', src: 'images/prevTattoos/spikes.jpg' },
+        { name: 'stars', src: 'images/prevTattoos/stars.jpg' },
+        { name: 'starSwirl', src: 'images/prevTattoos/starSwirl.jpg' },
   ];
    const flash = [
     { name: 'bunny dreams colour', src: 'images/flash/bunny.jpg' },
@@ -123,9 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const previewWindow = new DraggableWindow('previewWindow', bannerTitle, `
       <div class="preview-window">
-        <span class="arrow left" id="prevArrow"><</span>
+        <span class="arrow left" id="prevArrow"></span>
         <img src="${files[currentIndex].src}" alt="${files[currentIndex].name}" id="previewImage">
-        <span class="arrow right" id="nextArrow">></span>
+        <span class="arrow right" id="nextArrow"></span>
       </div>
     `, 600, 500);
 
@@ -133,18 +165,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
       previewWindow.updateTitle(bannerTitle);
 
+function showPrevImage() {
+  currentIndex = (currentIndex - 1 + files.length) % files.length;
+  document.getElementById('previewImage').src = files[currentIndex].src;
+  document.getElementById('previewImage').alt = files[currentIndex].name;
+}
 
-    document.getElementById('prevArrow').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + files.length) % files.length;
+function showNextImage() {
+currentIndex = (currentIndex + 1) % files.length;
       document.getElementById('previewImage').src = files[currentIndex].src;
       document.getElementById('previewImage').alt = files[currentIndex].name;
-    });
-
-    document.getElementById('nextArrow').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % files.length;
-      document.getElementById('previewImage').src = files[currentIndex].src;
-      document.getElementById('previewImage').alt = files[currentIndex].name;
-    });
+}
+    document.getElementById('prevArrow').addEventListener('click', showPrevImage);
+    document.getElementById('nextArrow').addEventListener('click', showNextImage);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        showNextImage();
+      } else if (event.key === 'ArrowLeft') {
+        showPrevImage();
+      }});
   }
 });
 
@@ -190,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Create instances of DraggableWindow with specified sizes
 const confirmationWindow = new DraggableWindow('confirmationWindow', 'Booking', `
   <iframe src="bookingConfirmation.html" style="width: 100%; height: 100%; border: none;"></iframe>
-`, 800, 900);
+`, 800, 600);
 
 // Create instances of DraggableWindow with specified sizes
 const confirmationWindowCustom = new DraggableWindow('confirmationWindowCustom', 'Send me your design', `
@@ -201,6 +240,7 @@ const confirmationWindowCustom = new DraggableWindow('confirmationWindowCustom',
 const paintWindow = new DraggableWindow('paintWindow', 'Paint', `
   <iframe src="paint.html" style="width: 100%; height: 100%; border: none;"></iframe>
 `, 800, 600);
+
 
 const musicPlayerWindow = new DraggableWindow('musicPlayerWindow', 'Music Player', `<ul id="songList"></ul>
   <audio id="audioPlayer" controls></audio>
@@ -213,7 +253,7 @@ const bookingWindow = new DraggableWindow('bookingWindow', 'Book', `
   <iframe src="booking.html" style="width: 100%; height: 100%; border: none;"></iframe>
 `, 500, 500);
 
-const contactWindow = new DraggableWindow('contactWindow', 'contact', '<p>Content for contact</p>', 500, 400);
+const contactWindow = new DraggableWindow('contactWindow', 'contact', '<iframe src="contact.html" style="width: 100%; height: 100%; border: none;"></iframe>', 500, 400);
 const aboutWindow = new DraggableWindow('aboutWindow', 'about Now', '<p>Content for about</p>', 500, 400);
 
 
@@ -231,6 +271,9 @@ document.getElementById('priceListIcon').addEventListener('click', () => {
 });
 
 document.getElementById('bookingIcon').addEventListener('click', () => {
+  const bookingIcon = document.getElementById('bookingIcon');
+  bookingIcon.classList.add('disabled');
+  bookingIcon.style.pointerEvents = 'none';
   document.getElementById('bookingWindow').style.display = 'block';
 });
 document.getElementById('contactIcon').addEventListener('click', () => {
@@ -252,9 +295,15 @@ document.getElementById('songList').addEventListener('click', (e) => {
 // Function to show the confirmation window if the hash fragment is present
 function showConfirmationWindow() {
   if (window.location.hash === '#success') {
-    let confirm = document.getElementById('confirmationWindow')
+    let confirm = document.getElementById('confirmationWindow');
     confirm.style.display = 'block';
+    const closeBtns = confirm.getElementsByClassName('close-btn');
+    for (let btn of closeBtns) {
+      btn.addEventListener('click', () => {
+        window.location.href = '/'; // Redirect to home page
+      });
     }
+  }
 }
 
 // Function to show the confirmation window if the hash fragment is present
@@ -265,7 +314,8 @@ function showConfirmationWindowCustom() {
     const closeBtns = customConfirm.getElementsByClassName('close-btn');
     if (closeBtns.length > 0) {
       closeBtns[0].style.display = 'none';
-    }  }
+    } 
+  }
 }
 
 // Combine the functions to be called on page load

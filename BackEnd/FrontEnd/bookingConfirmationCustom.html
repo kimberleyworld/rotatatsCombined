@@ -41,12 +41,23 @@
               <button id="sendEmailButton">Submit</button>
             </div>
           </form>
+
+          <div id="messageBox" class="messageBox"></div>
         </div>
       </div>
     </div>
     <!-- Script to load the sketch from localStorage and display it -->
     <script>
       let savedDataUrl;
+
+      function displayMessage(message, isSuccess = false) {
+        const messageBox = document.getElementById("messageBox");
+        messageBox.textContent = message;
+        messageBox.className = "messageBox";
+        if (isSuccess) {
+          messageBox.classList.add("success");
+        }
+      }
       // Retrieve the saved sketch data URL from localStorage
       window.onload = function () {
         savedDataUrl = localStorage.getItem("sketchDataUrl");
@@ -79,13 +90,13 @@
 
         // Check if email is valid
         if (!emailRegex.test(userEmail)) {
-          alert("Please enter a valid email address.");
+          displayMessage("Please enter a valid email address.");
           return false;
         }
 
         // Check if comments are not empty
         if (userComments.trim() === "") {
-          alert("Please enter some comments.");
+          displayMessage("Please enter some comments.");
           return false;
         }
 
@@ -133,22 +144,22 @@
 
           if (response.ok) {
             const message = await response.text();
-            alert(
+            displayMessage(
               `Emails sent successfully! Your reference number is: ${referenceNumber}`
             );
-            // Close the confirmationWindowCustom
             const customConfirm = parent.document.getElementById(
               "confirmationWindowCustom"
             );
             if (customConfirm) {
               customConfirm.style.display = "none";
+              window.location.href = "/";
             }
           } else {
-            alert("Failed to send emails: " + response.statusText);
+            displayMessage("Failed to send emails: " + response.statusText);
           }
         } catch (error) {
           console.error("Error sending emails:", error);
-          alert("Error sending request.");
+          displayMessage("Error sending request.");
         }
       }
     </script>

@@ -39,7 +39,6 @@ input:active {
   position: relative; /* To position the arrow-button inside */
   display: flex; /* Use flexbox to align children (text and arrow) */
   justify-content: space-between; /* Space out the text and the arrow */
-  padding-right: 25px; /* Make space for the arrow on the right */
 }
 
 .dropdown-button:focus {
@@ -77,8 +76,8 @@ input:active {
 }
 
 .dropdown-item .color-box {
-  width: 8px;
-  height: 8px;
+  width: 12px;
+  height: 12px;
   margin-left: 10px;
 }
 
@@ -135,14 +134,25 @@ input:active {
 .thickLine,
 .thinLine {
   width: 100%;
-  background-color: #333;
 }
 
 .thickLine {
-  height: 15px;
+  height: 4px !important;
 }
 .thinLine {
-  height: 3px;
+  height: 2px !important;
+}
+
+.line {
+  width: 100%;
+  background-color: black;
+  margin: 5px 0;
+}
+
+#iconTool {
+  width: 20px;
+  height: 20px;
+  margin: 0px;
 }
 
 /* Action Button Styles */
@@ -166,6 +176,7 @@ button:hover,
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 }
 
 #sketchHere {
@@ -191,6 +202,17 @@ button:hover,
   justify-content: center;
   align-items: center;
   z-index: 1000;
+}
+
+#backButton, #submit{
+  width: 50px;
+}
+
+.buttonDiv {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 /* Modal window */
@@ -233,7 +255,8 @@ button:hover,
   width: 100%;
   max-width: 100%;
   height: 100%;
-  justify-content: center;
+  justify-content: start;
+  padding-top: 80px;
 }
 
 #srcSketch {
