@@ -129,7 +129,7 @@
           {
             to: userEmail, // Send to the user's provided email
             subject: `Your ROTATATS Design - Reference: ${referenceNumber}`,
-            text: `Thank you for your submission. Your reference number is ${referenceNumber}. Here is the link to book your slot: https://calendly.com/rotatats/tattoo-appointment. Your comments: ${userComments}`,
+            text: `Thank you for your submission. Your reference number is ${referenceNumber}. Here is the link to book your slot: https://calendly.com/rotatatz/30min. Your comments: ${userComments}`,
             image: savedDataUrl,
           },
           {
@@ -158,8 +158,8 @@
               "confirmationWindowCustom"
             );
             if (customConfirm) {
-              customConfirm.style.display = "none";
               window.location.href = "/";
+              customConfirm.style.display = "none";
             }
           } else {
             displayMessage("Failed to send emails: " + response.statusText);

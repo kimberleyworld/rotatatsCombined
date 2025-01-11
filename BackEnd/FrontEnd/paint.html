@@ -19,8 +19,8 @@
         <button id="backButton">Back</button>
         <button id="submit" onclick="saveCanvasImage">Next</button>
       </div>
-<p>Draw your design on the canvas and I will transform it into a stencil and onto your skin.</p>
-            <!-- Canvas Area -->
+<p>Draw your own design and I will turn it into your new tattoo!</p>
+      <!-- Canvas Area -->
       <div class="sketchSpace">
         <div id="sketchHere">
         </div>
@@ -124,13 +124,13 @@
     <!-- confirm modal -->
     <div id="confirmModal" class="modal">
       <div class="modal-content">
-        <h2 class="PaddingBottom">Confirm Appointment</h2>
+        <h2 class="PaddingBottom">Confirm your Design</h2>
         <div class="PaddingBottom" id="copyOfSketch">
           <img id="srcSketch" src="" alt="" />
         </div>
         <div class="PaddingBottom">
-          <button id="confirm">CONFIRM</button>
-          <button id="noConfirm">CANCEL</button>
+          <button id="confirm">Confirm</button>
+          <button id="noConfirm">Cancel</button>
         </div>
       </div>
     </div>
@@ -141,11 +141,14 @@
         <div class="button-container">
         <button class="close-button close-btn" id="close-buttonPay">X</button>
       </div>
-        <h2 class="PaddingBottom">Pay deposit to confirm</h2>
-        <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+        <h2 class="PaddingBottom">Pay deposit to book an appointment</h2>
+        <script async
+          src="https://js.stripe.com/v3/buy-button.js">
+        </script>
+
         <stripe-buy-button
-          buy-button-id="buy_btn_1QCQSTDijhK8j4obWC294HuZ"
-          publishable-key="pk_test_51Q1rgxDijhK8j4obuHix1sBoYHbUCv3NVMjl5vHkLLrfXfUtz50xttrNKoBYNUJBQoQ91AlegSrtDW8UX0EyC8fQ00sircIRU6"
+          buy-button-id="buy_btn_1QfTHJDijhK8j4ob4Ws9O0CG"
+          publishable-key="pk_live_51Q1rgxDijhK8j4obKVgDO0ri3xaeJ4NIxk7sCJwb3m9LxaKwx1eowMUR5Ql2aHYHJM5EJYT925x99awDZxZ3HxDK00TgmfZYNb"
         >
         </stripe-buy-button>
       </div>
