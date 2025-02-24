@@ -71,6 +71,10 @@ function setup() {
     dropdownOptions.classList.toggle("active");
   });
 
+   // Bind touch events
+  canvas.touchStarted(touchStarted);
+  canvas.touchMoved(touchMoved);
+
 }
 
 function draw() {
@@ -81,22 +85,12 @@ function draw() {
     cursor(ARROW); // Reset to default cursor outside the canvas
   }
 }
-function mouseDragged(event) {
+
+
+function touchStarted(event) {
   event.preventDefault();
-
-  // Save the current stroke to the strokes array
-  let strokeData = {
-    x1: mouseX,
-    y1: mouseY,
-    x2: pmouseX,
-    y2: pmouseY,
-    color: brush,
-    thickness: thickness,
-  };
-  strokes.push(strokeData);
-
-  // Draw the stroke on the canvas
-  drawStroke(strokeData);
+  mouseDragged(event); // Start drawing immediately on touch
+  return false; // Prevent default touch behavior
 }
 
 function touchMoved(event) {

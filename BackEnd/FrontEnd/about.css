@@ -186,7 +186,7 @@ iframe {
       width: 300px; /* Set the desired width */
   height: 400px; /* Set the desired height */
   object-fit: cover; /* Crop the image to fit the container */
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff;
 }
 
 .arrow{

@@ -117,73 +117,60 @@ function makeDraggable(element) {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const files = [
-        { name: 'spikes', src: 'images/prevTattoos/spikes.jpg' },
-        { name: 'flowers', src: 'images/prevTattoos/flowers.jpg' },
-        { name: 'bow', src: 'images/prevTattoos/bow.jpg' },
-        { name: 'colour line', src: 'images/prevTattoos/colourLine.jpg' },
-        { name: 'soft', src: 'images/prevTattoos/soft.jpg' },
-        { name: 'homo', src: 'images/prevTattoos/homo.jpg' },
-        { name: 'spikes', src: 'images/prevTattoos/spikes.jpg' },
-        { name: 'stars', src: 'images/prevTattoos/stars.jpg' },
-        { name: 'starSwirl', src: 'images/prevTattoos/starSwirl.jpg' },
-  ];
-   const flash = [
-    { name: 'bunny dreams colour', src: 'images/flash/bunny.jpg' },
-    { name: 'web', src: 'images/flash/web.jpg' },
-    { name: 'square hearts', src: 'images/flash/squareHearts.jpg' },
-    { name: 'flower butterfly', src: 'images/flash/flowerbutterfly.jpg' },
-    { name: 'daydreaming block page', src: 'images/flash/daydreamingblockpage.jpg' },
-    { name: 'gates', src: 'images/flash/gates.jpg' },
-    { name: 'hot', src: 'images/flash/hot.jpg' },
-    { name: 'livelovelearntobeabutterfly', src: 'images/flash/livelovelearntobeabutterfly.jpg' },
-    { name: 'loverluvblockpage', src: 'images/flash/loverluvblockpage.jpg' },
-    { name: 'prettypleasepage', src: 'images/flash/prettypleasepage.jpg' },
-    { name: 'softspotblockspage', src: 'images/flash/softspotblocksfullpage.jpg' },
-  ];
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("picturesIcon").addEventListener("click", () => {
+    fetchImages("/prevTattoos", "Previous Work");
+  });
 
-  document.getElementById('picturesIcon').addEventListener('click', () => {
-    openPreviewWindow(files, "Previous Work");
+  document.getElementById("flashIcon").addEventListener("click", () => {
+    fetchImages("/flash-images", "Flash");
   });
-   document.getElementById('flashIcon').addEventListener('click', () => {
-    openPreviewWindow(flash, "Flash");
-  });
+
+  function fetchImages(url, bannerTitle) {
+    fetch(url)
+      .then(response => response.json())
+      .then(files => openPreviewWindow(files, bannerTitle))
+      .catch(error => console.error("Error fetching images:", error));
+  }
 
   function openPreviewWindow(files, bannerTitle) {
     let currentIndex = 0;
+    if (files.length === 0) return;
 
-    const previewWindow = new DraggableWindow('previewWindow', bannerTitle, `
+    const previewWindow = new DraggableWindow(
+      "previewWindow",
+      bannerTitle,
+      `
       <div class="preview-window">
         <span class="arrow left" id="prevArrow"></span>
         <img src="${files[currentIndex].src}" alt="${files[currentIndex].name}" id="previewImage">
         <span class="arrow right" id="nextArrow"></span>
       </div>
-    `, 600, 500);
+    `,
+      600,
+      500
+    );
 
-    document.getElementById('previewWindow').style.display = 'block';
+    document.getElementById("previewWindow").style.display = "block";
 
-      previewWindow.updateTitle(bannerTitle);
+    function showPrevImage() {
+      currentIndex = (currentIndex - 1 + files.length) % files.length;
+      document.getElementById("previewImage").src = files[currentIndex].src;
+      document.getElementById("previewImage").alt = files[currentIndex].name;
+    }
 
-function showPrevImage() {
-  currentIndex = (currentIndex - 1 + files.length) % files.length;
-  document.getElementById('previewImage').src = files[currentIndex].src;
-  document.getElementById('previewImage').alt = files[currentIndex].name;
-}
+    function showNextImage() {
+      currentIndex = (currentIndex + 1) % files.length;
+      document.getElementById("previewImage").src = files[currentIndex].src;
+      document.getElementById("previewImage").alt = files[currentIndex].name;
+    }
 
-function showNextImage() {
-currentIndex = (currentIndex + 1) % files.length;
-      document.getElementById('previewImage').src = files[currentIndex].src;
-      document.getElementById('previewImage').alt = files[currentIndex].name;
-}
-    document.getElementById('prevArrow').addEventListener('click', showPrevImage);
-    document.getElementById('nextArrow').addEventListener('click', showNextImage);
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight') {
-        showNextImage();
-      } else if (event.key === 'ArrowLeft') {
-        showPrevImage();
-      }});
+    document.getElementById("prevArrow").addEventListener("click", showPrevImage);
+    document.getElementById("nextArrow").addEventListener("click", showNextImage);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") showNextImage();
+      else if (event.key === "ArrowLeft") showPrevImage();
+    });
   }
 });
 

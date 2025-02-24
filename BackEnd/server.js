@@ -74,6 +74,41 @@ app.get("/audio-files", (req, res) => {
   });
 });
 
+// Serve static files from the "prev work" and "flash" folders
+app.use("/prevTattoos", express.static(path.join(__dirname, "prevTattoos")));
+app.use("/flash", express.static(path.join(__dirname, "flash")));
+
+// Fetch all images in the "prev work" folder
+app.get("/prevTattoos", (req, res) => {
+  const prevWorkDir = path.join(__dirname, "prevTattoos");
+  fs.readdir(prevWorkDir, (err, files) => {
+    if (err) return res.status(500).send("Unable to scan directory");
+
+    const imageFiles = files.map(file => ({
+      name: path.basename(file, path.extname(file)), // Remove extension
+      src: `/prevTattoos/${file}`, // Path to access the file
+    }));
+
+    res.json(imageFiles);
+  });
+});
+
+// Fetch all images in the "flash" folder
+app.get("/flash-images", (req, res) => {
+  const flashDir = path.join(__dirname, "flash");
+  fs.readdir(flashDir, (err, files) => {
+    if (err) return res.status(500).send("Unable to scan directory");
+
+    const imageFiles = files.map(file => ({
+      name: path.basename(file, path.extname(file)),
+      src: `/flash/${file}`,
+    }));
+
+    res.json(imageFiles);
+  });
+});
+
+
 // Fallback route for the root path, serve index.html for frontend
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "FrontEnd", "index.html"));
