@@ -9,7 +9,7 @@ html, body {
 }
 
 .background {
-    background-image: url('images/windows.jpg');
+    background-image: url('images/windows.webp');
     background-size: cover;
     background-position: center;
 }
@@ -195,7 +195,6 @@ iframe {
   height: 0;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
   margin: 20px
 }
 
@@ -236,6 +235,16 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 text-align: center;
+}
+
+  #contactBody {
+    justify-content: center;
+  }
+
+.contact #icon {
+  width: 30px;
+  height: 30px;
+  margin-top: 20px;
 }
 
 #icon {
@@ -312,8 +321,11 @@ text-align: center;
 }
 
 @media (max-width: 768px) {
-  body {
+    body {
     justify-content: flex-start;
-    margin: 10px;
+    padding: 10px;
+  }
+  #contactBody {
+    justify-content: center;
   }
 }
