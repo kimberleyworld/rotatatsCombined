@@ -213,21 +213,19 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
 // Create instances of DraggableWindow with specified sizes
 const confirmationWindow = new DraggableWindow('confirmationWindow', 'Booking', `
   <iframe src="bookingConfirmation.html" style="width: 100%; height: 100%; border: none;"></iframe>
 `, 800, 600);
 
-// Create instances of DraggableWindow with specified sizes
 const confirmationWindowCustom = new DraggableWindow('confirmationWindowCustom', 'Send me your design', `
   <iframe src="bookingConfirmationCustom.html" style="width: 100%; height: 100%; border: none;"></iframe>
 `, 800, 600);
 
-// Create instances of DraggableWindow with specified sizes
 const paintWindow = new DraggableWindow('paintWindow', 'Paint', `
   <iframe src="paint.html" style="width: 100%; height: 100%; border: none;"></iframe>
 `, 800, 600);
-
 
 const musicPlayerWindow = new DraggableWindow('musicPlayerWindow', 'Music Player', `<ul id="songList"></ul>
   <audio id="audioPlayer" controls></audio>
@@ -263,9 +261,11 @@ document.getElementById('bookingIcon').addEventListener('click', () => {
   bookingIcon.style.pointerEvents = 'none';
   document.getElementById('bookingWindow').style.display = 'block';
 });
+
 document.getElementById('contactIcon').addEventListener('click', () => {
   document.getElementById('contactWindow').style.display = 'block';
 });
+
 document.getElementById('instaIcon').addEventListener('click', () => {
   window.open('https://www.instagram.com/rotatats/?hl=en');
 });

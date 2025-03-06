@@ -12,15 +12,34 @@ const message = document.getElementById("message");
 
 // Array to store all the strokes
 let strokes = [];
-  // Function to handle option selection
-  dropdownItems.forEach((item) => {
-    item.addEventListener("click", () => {
-      selectedColor = item.getAttribute("data-value"); // Get the selected color
-      background(selectedColor);
-      dropdownOptions.classList.remove("active");
-      document.getElementById("toneModal").style.display = "none";
-    });
+  
+// Function to handle option selection
+dropdownItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    selectedColor = item.getAttribute("data-value"); // Get the selected color
+    background(selectedColor);
+    dropdownOptions.classList.remove("active");
+    document.getElementById("toneModal").style.display = "none";
   });
+
+  // Add touch event listener for mobile devices
+  item.addEventListener("touchstart", () => {
+    selectedColor = item.getAttribute("data-value"); // Get the selected color
+    background(selectedColor);
+    dropdownOptions.classList.remove("active");
+    document.getElementById("toneModal").style.display = "none";
+  });
+});
+
+// Function to toggle the dropdown visibility
+dropdownButton.addEventListener("click", () => {
+  dropdownOptions.classList.toggle("active");
+});
+
+// Add touch event listener for mobile devices
+dropdownButton.addEventListener("touchstart", () => {
+  dropdownOptions.classList.toggle("active");
+});
 
 function setup() {
   setCanvasSize(); // Update canvas size based on the new window size
@@ -85,7 +104,6 @@ function draw() {
     cursor(ARROW); // Reset to default cursor outside the canvas
   }
 }
-
 
 function touchStarted(event) {
   event.preventDefault();
