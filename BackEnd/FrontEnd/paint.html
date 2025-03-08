@@ -141,7 +141,7 @@
         <div class="button-container">
         <button class="close-button close-btn" id="close-buttonPay">X</button>
       </div>
-        <h2 class="PaddingBottom">Pay deposit to book an appointment</h2>
+        <h2 class="PaddingBottom PaddingTop">Pay deposit to book an appointment</h2>
         <script async
           src="https://js.stripe.com/v3/buy-button.js">
         </script>
@@ -154,16 +154,31 @@
       </div>
     </div>
         <script defer src="paintSketch.js"></script>
-        <script defer src="index.js"></script>
         <script>
           let pressedSave = false;
 let sketch;
 let dataUrl;
 
-document.getElementById("confirm").onclick = () => {
+function openPaymentModal() {
   document.getElementById("paymentModal").style.display = "flex";
   document.getElementById("confirmModal").style.display = "none";
-};
+}
+
+document.getElementById("confirm").addEventListener("click", openPaymentModal);
+document.getElementById("confirm").addEventListener("touchstart", openPaymentModal);
+
+// takes copy of canvas and opens confirm modal
+function openConfirmModal() {
+  document.getElementById("confirmModal").style.display = "flex";
+  sketch = document.querySelector("canvas");
+  dataUrl = sketch.toDataURL("image/jpeg");
+  console.log("Canvas Data URL:", dataUrl);
+  localStorage.setItem("sketchDataUrl", dataUrl);
+  document.getElementById("srcSketch").setAttribute("src", dataUrl);
+}
+
+ document.getElementById("submit").addEventListener("click", openConfirmModal);
+ document.getElementById("submit").addEventListener("touchstart", openConfirmModal);
 
 // takes copy of canvas and opens confirm modal
 document.getElementById("submit").onclick = () => {
@@ -174,23 +189,32 @@ document.getElementById("submit").onclick = () => {
   localStorage.setItem("sketchDataUrl", dataUrl);
   document.getElementById("srcSketch").setAttribute("src", dataUrl);
 };
-// close button 
-document.getElementById("close-buttonPay").onclick = function () {
-  document.getElementById("confirmModal").style.display = "none";
-};
 
-// close button 
-document.getElementById("noConfirm").onclick = function () {
+function closeConfirmModalDrawUrOwn() {
   document.getElementById("confirmModal").style.display = "none";
-};
+}
+
+// close button confirm modal paint ur own
+document.getElementById("noConfirm").addEventListener("click", closeConfirmModalDrawUrOwn);
+document.getElementById("noConfirm").addEventListener("touchstart", closeConfirmModalDrawUrOwn);
 
 // close button payment
-document.getElementById("close-buttonPay").onclick = function () {
+function closePaymentModalDrawUrOwn() {
   document.getElementById("paymentModal").style.display = "none";
 };
 
+// close button payment model paint ur own
+document.getElementById("close-buttonPay").addEventListener("click", closePaymentModalDrawUrOwn);
+document.getElementById("close-buttonPay").addEventListener("touchstart", closePaymentModalDrawUrOwn);
+
+
 //back button
 document.getElementById('backButton').addEventListener('click', () => {
+  document.getElementById('toneModal').style.display = 'block';
+});
+
+//back button mobile
+document.getElementById('backButton').addEventListener('touchstart', () => {
   document.getElementById('toneModal').style.display = 'block';
 });
 

@@ -193,6 +193,9 @@ body {
 .PaddingBottom {
   padding-bottom: 20px;
 }
+.PaddingTop {
+  padding-top: 20px;
+}
 
 .paddingTopLarge {
   padding-top: 10vw;

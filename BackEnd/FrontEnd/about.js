@@ -26,16 +26,16 @@ function DraggableWindow(id, title, content, width = 300, height = 200) {
      windowDiv.style.position = 'absolute';
     windowDiv.style.zIndex = zIndexCounter; // Set initial z-index
 
-     // Set width and height based on screen size
-    if (window.innerWidth <= 768) {
-      windowDiv.style.width = '100%';
-      windowDiv.style.height = '100%';
-      windowDiv.style.left = '2px';
-      windowDiv.style.top = '2px';
-    } else {
-      windowDiv.style.width = `${this.width}px`;
-      windowDiv.style.height = `${this.height}px`;
-    }
+    //  // Set width and height based on screen size
+    // if (window.innerWidth <= 768) {
+    //   windowDiv.style.width = '100%';
+    //   windowDiv.style.height = '100%';
+    //   windowDiv.style.left = '2px';
+    //   windowDiv.style.top = '2px';
+    // } else {
+    //   windowDiv.style.width = `${this.width}px`;
+    //   windowDiv.style.height = `${this.height}px`;
+    // }
 
     const titleBar = document.createElement('div');
     titleBar.classList.add('title-bar');
@@ -238,7 +238,7 @@ const bookingWindow = new DraggableWindow('bookingWindow', 'Book', `
   <iframe src="booking.html" style="width: 100%; height: 100%; border: none;"></iframe>
 `, 500, 500);
 
-const contactWindow = new DraggableWindow('contactWindow', 'contact', '<iframe src="contact.html" style="width: 100%; height: 100%; border: none;"></iframe>', 500, 400);
+const contactWindow = new DraggableWindow('contactWindow', 'contact', '<iframe src="contact.html"></iframe>', 500, 400);
 const aboutWindow = new DraggableWindow('aboutWindow', 'about Now', '<p>Content for about</p>', 500, 400);
 
 

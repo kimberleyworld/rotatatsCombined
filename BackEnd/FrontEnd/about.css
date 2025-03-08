@@ -37,11 +37,14 @@ html, body {
 .window {
   border: 2px solid #000;
   position: absolute;
-  top: 5px;
-  left: 150px;
   background-color: #c0c0c0;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   display: none; /* Initially hidden */
+  z-index: 1000;
+  width: 60%;
+  height: 650px;
+  left: 30px;
+  top: 30px;
 }
 
 .title-bar {
@@ -65,6 +68,8 @@ html, body {
   border: none;
   cursor: pointer;
   padding: 2px 5px;
+  width: 25px;
+  height: 25px;
 }
 
 .content {
@@ -183,10 +188,9 @@ iframe {
 }
 
 .preview-window img {
-      width: 300px; /* Set the desired width */
-  height: 400px; /* Set the desired height */
-  object-fit: cover; /* Crop the image to fit the container */
-  border: 1px solid #ffffff;
+  width: 300px;
+  height: 400px;
+  object-fit: fill;
 }
 
 .arrow{
@@ -218,7 +222,6 @@ border-bottom: none;
 
 .windowContainer {
   width: 60%;
-  margin: 0 auto;
   padding: 20px;
   text-align: center;
 }
@@ -267,7 +270,7 @@ text-align: center;
     display: block;
   }
 *{
-  font-size: 20px;
+  font-size: 15px;
 }
   .window {
     width: 200px;
@@ -311,12 +314,18 @@ text-align: center;
   select,
   #submit {
     align-self: center;
-    width: 100%;
     padding: 5px;
   }
 
   .title {
     font-size: 16px;
+  }
+  
+  .window {
+    width: 95%;
+    height: 94%;
+    left: 2%;
+    top: 2%;
   }
 }
 
@@ -325,7 +334,6 @@ text-align: center;
     justify-content: flex-start;
     padding: 10px;
   }
-  #contactBody {
-    justify-content: center;
-  }
 }
+
+

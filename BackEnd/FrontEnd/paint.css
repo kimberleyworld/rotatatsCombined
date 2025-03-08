@@ -123,6 +123,7 @@ input:active {
   height: 40px;
   cursor: pointer;
   outline: none;
+  margin-top: 10px;
 }
 
 .paintTool div {
@@ -205,7 +206,8 @@ button:hover,
 }
 
 #backButton, #submit{
-  width: 50px;
+  width: 60px;
+  margin-top: 10px;
 }
 
 .buttonDiv {
@@ -232,7 +234,7 @@ button:hover,
 
 /* Modal content */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #c0c0c0;
   padding: 20px;
   border: 1px solid #888;
   width: 90%; /* Make the modal width a percentage of the viewport width */

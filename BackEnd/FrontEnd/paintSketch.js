@@ -1,7 +1,7 @@
 let canvas;
 let brush;
 let thickness;
-let undoStepSize = 5; // Number of strokes to undo in one click
+let undoStepSize = 10; // Number of strokes to undo in one click
 let sketchWidth;
 let sketchHeight;
 let selectedColor = "";
@@ -21,25 +21,30 @@ dropdownItems.forEach((item) => {
     dropdownOptions.classList.remove("active");
     document.getElementById("toneModal").style.display = "none";
   });
+});
 
-  // Add touch event listener for mobile devices
-  item.addEventListener("touchstart", () => {
+  // Function to toggle the dropdown visibility
+  dropdownButton.addEventListener("click", () => {
+    dropdownOptions.classList.toggle("active");
+  });
+
+    // Function to toggle the dropdown visibility mobile
+  dropdownButton.addEventListener("touchstart", () => {
+    dropdownOptions.classList.toggle("active");
+  });
+
+  // Function to handle option selection mobile
+dropdownItems.forEach((item) => {
+  item.addEventListener("touchend", (event) => {
     selectedColor = item.getAttribute("data-value"); // Get the selected color
     background(selectedColor);
     dropdownOptions.classList.remove("active");
     document.getElementById("toneModal").style.display = "none";
+    event.stopPropagation(); 
+    event.preventDefault();
   });
 });
 
-// Function to toggle the dropdown visibility
-dropdownButton.addEventListener("click", () => {
-  dropdownOptions.classList.toggle("active");
-});
-
-// Add touch event listener for mobile devices
-dropdownButton.addEventListener("touchstart", () => {
-  dropdownOptions.classList.toggle("active");
-});
 
 function setup() {
   setCanvasSize(); // Update canvas size based on the new window size
@@ -59,9 +64,26 @@ function setup() {
     });
   });
 
+    // Bind color change buttons mobile
+  document.querySelectorAll(".paintTool[data-color]").forEach((button) => {
+    button.addEventListener("touchstart", function () {
+      const newColor = this.getAttribute("data-color");
+      changeBrushColor(newColor);
+    });
+  });
+
+
   // Bind thickness change buttons
   document.querySelectorAll(".paintTool[data-thickness]").forEach((button) => {
     button.addEventListener("click", function () {
+      const newThickness = this.getAttribute("data-thickness");
+      changeBrushThickness(newThickness);
+    });
+  });
+
+    // Bind thickness change buttons mobile
+  document.querySelectorAll(".paintTool[data-thickness]").forEach((button) => {
+    button.addEventListener("touchstart", function () {
       const newThickness = this.getAttribute("data-thickness");
       changeBrushThickness(newThickness);
     });
@@ -72,22 +94,33 @@ function setup() {
     .getElementById("undoButton")
     .addEventListener("click", undoLastStroke);
 
+    // Bind undo button mobile
+  document
+    .getElementById("undoButton")
+    .addEventListener("touchstart", undoLastStroke);
+
   // Bind erase button
   document.getElementById("eraseButton").addEventListener("click", function () {
     brush = color(selectedColor); // Set brush to white when erasing
     console.log("Erase mode activated");
   });
 
+    // Bind erase button mobile
+  document.getElementById("eraseButton").addEventListener("touchstart", function () {
+    brush = color(selectedColor); // Set brush to white when erasing
+    console.log("Erase mode activated");
+  });
+
   // Bind clear canvas button
-  const clearButton = document.getElementById("clearCanvas");
-  clearButton.addEventListener("click", function () {
+  document.getElementById("clearCanvas").addEventListener("click", function () {
     strokes = []; // Clear the strokes array
     background(selectedColor || "#ffffff"); // Clear the canvas (set to selected color or white)
   });
 
-  // Function to toggle the dropdown visibility
-  dropdownButton.addEventListener("click", () => {
-    dropdownOptions.classList.toggle("active");
+  // Bind clear canvas button mobile
+  document.getElementById("clearCanvas").addEventListener("touchstart", function () {
+    strokes = []; // Clear the strokes array
+    background(selectedColor || "#ffffff"); // Clear the canvas (set to selected color or white)
   });
 
    // Bind touch events
