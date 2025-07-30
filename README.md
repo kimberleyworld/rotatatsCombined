@@ -1,5 +1,5 @@
 # rotatatsCombined
-Rotatats is a creative web platform for designing and booking custom tattoos. Users can draw their own designs, preview previous works, and easily schedule appointments online. The site features an interactive drawing tool, a gallery of past tattoos, and a streamlined booking process to make your tattoo experience unique and personal.
+INACTIVE PROJECT. Rotatats is a creative exercise that I will return to, properly review and launch. It was built in a different repo and combined for deployment. It's a web platform for designing and booking custom tattoos. Users can draw their designs, preview previous works, and easily schedule appointments online. The site features an interactive drawing tool, a gallery of past tattoos, and a streamlined booking process to make your tattoo experience unique and personal.
 
 # Technology Stack
 Rotatats is built with a Node.js and Express backend, serving a modern JavaScript frontend. The site uses HTML5, CSS3 (with SCSS), and vanilla JavaScript for interactive features like the drawing tool and gallery. EmailJS is used for email notifications, and Stripe is integrated for secure online payments. The project structure separates backend and frontend code for clarity and maintainability.
